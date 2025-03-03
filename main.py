@@ -17,10 +17,10 @@ app.add_middleware(
     allow_methods=["*"],  
     allow_headers=["*"],  
 )
-with open("models/phishing_detection_model.pkl", "rb") as model_file:
+with open("phishing_detection_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
-with open("models/tfidf_vectorizer.pkl", "rb") as vectorizer_file:
+with open("tfidf_vectorizer.pkl", "rb") as vectorizer_file:
     vectorizer = pickle.load(vectorizer_file)
 
 
