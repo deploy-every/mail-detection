@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
+import os
 import numpy as np
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,5 +37,6 @@ def predict_email(input_data: EmailInput):
 
 
 if __name__ == "__main__":
-    # Directly binding to 0.0.0.0 and port 8000
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Use the PORT environment variable or default to 10000
+    port = int(os.getenv("PORT", 10000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
