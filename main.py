@@ -18,6 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Load model and vectorizer
 with open("phishing_detection_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
 
@@ -39,5 +40,5 @@ def predict_email(input_data: EmailInput):
 
 if __name__ == "__main__":
     # Dynamic port binding for deployment
-    port = int(os.getenv("PORT", 8000))  
+    port = int(os.getenv("PORT", 8000))  # Default to 8000 if no environment variable
     uvicorn.run(app, host="0.0.0.0", port=port)
