@@ -1,10 +1,8 @@
-import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
 import numpy as np
 import uvicorn
-
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -25,7 +23,6 @@ with open("phishing_detection_model.pkl", "rb") as model_file:
 with open("tfidf_vectorizer.pkl", "rb") as vectorizer_file:
     vectorizer = pickle.load(vectorizer_file)
 
-
 class EmailInput(BaseModel):
     message: str
 
@@ -39,6 +36,5 @@ def predict_email(input_data: EmailInput):
 
 
 if __name__ == "__main__":
-    # Dynamic port binding for deployment
-    port = int(os.getenv("PORT", 8000))  # Default to 8000 if no environment variable
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    # Directly binding to 0.0.0.0 and port 8000
+    uvicorn.run(app, host="0.0.0.0", port=8000)
